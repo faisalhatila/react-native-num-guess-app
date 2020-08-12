@@ -6,7 +6,6 @@ const StartGameScreen = () => {
     <View style={styles.screen}>
       <Text style={styles.title}>Start a New Game!</Text>
       <Card style={styles.inputContainer}>
-        {" "}
         <Text>Select a Number</Text>
         <TextInput />
         <View style={styles.buttonContainer}>
@@ -14,14 +13,6 @@ const StartGameScreen = () => {
           <Button title="Confirm" onPress={() => {}} />
         </View>
       </Card>
-      {/* <View style={styles.inputContainer}>
-        <Text>Select a Number</Text>
-        <TextInput />
-        <View style={styles.buttonContainer}>
-          <Button title="Reset" onPress={() => {}} />
-          <Button title="Confirm" onPress={() => {}} />
-        </View>
-      </View> */}
     </View>
   );
 };
