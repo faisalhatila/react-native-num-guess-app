@@ -15,6 +15,9 @@ const StartGameScreen = () => {
   const numberInputHandler = (inputText) => {
     setEnteredValue(inputText.replace(/[^0-9]/g), "");
   };
+  const resetInputHandler = () => {
+    setEnteredValue("");
+  };
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -37,7 +40,11 @@ const StartGameScreen = () => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.buttonWrapperView}>
-              <Button title="Reset" onPress={() => {}} color={Colors.accent} />
+              <Button
+                title="Reset"
+                onPress={resetInputHandler}
+                color={Colors.accent}
+              />
             </View>
             <View style={styles.buttonWrapperView}>
               <Button
