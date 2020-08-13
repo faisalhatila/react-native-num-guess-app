@@ -41,6 +41,7 @@ const StartGameScreen = () => {
     setConfirmed(true);
     setSelectedNumber(choosenNumber);
     setEnteredValue("");
+    Keyboard.dismiss();
   };
   let confirmedOutput;
   if (confirmed)
@@ -48,7 +49,7 @@ const StartGameScreen = () => {
       <Card style={styles.summaryContainer}>
         <Text>You selected: {selectedNumber}</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button title="START GAME" />
+        <Button title="START GAME" color={Colors.accent} />
       </Card>
     );
 
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
   },
   summaryContainer: {
     marginTop: 20,
+    alignItems: "center",
   },
   confirmedOutputText: {
     color: "#fff",
