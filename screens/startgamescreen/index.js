@@ -24,7 +24,7 @@ const StartGameScreen = () => {
   };
   const confirmInputHandler = () => {
     const choosenNumber = parseInt(enteredValue);
-    if (choosenNumber === NaN || choosenNumber <= 0 || choosenNumber > 99) {
+    if (isNaN(choosenNumber) || choosenNumber <= 0 || choosenNumber > 99) {
       Alert.alert(
         "Invalid Number",
         "Number  has to be a number between 1 & 99.",
@@ -43,7 +43,12 @@ const StartGameScreen = () => {
     setEnteredValue("");
   };
   let confirmedOutput;
-  if (confirmed) confirmedOutput = <Text>Chosen Number: {selectedNumber}</Text>;
+  if (confirmed)
+    confirmedOutput = (
+      <Text style={styles.confirmedOutputText}>
+        Chosen Number: {selectedNumber}
+      </Text>
+    );
 
   return (
     <TouchableWithoutFeedback
@@ -114,6 +119,17 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 50,
+    textAlign: "center",
+  },
+  confirmedOutputText: {
+    color: "#fff",
+    marginVertical: 10,
+    backgroundColor: Colors.primaryColor,
+    // flex: 1,
+    flexDirection: "row",
+    width: "80%",
+    borderRadius: 5,
+    padding: 5,
     textAlign: "center",
   },
 });
