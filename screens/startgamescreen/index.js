@@ -9,7 +9,13 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
-import { Card, Input, NumberContainer, BodyText } from "../../components";
+import {
+  Card,
+  Input,
+  NumberContainer,
+  BodyText,
+  TitleText,
+} from "../../components";
 import Colors from "../../constants/colors";
 const StartGameScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -64,7 +70,8 @@ const StartGameScreen = (props) => {
       }}
     >
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        {/* <Text style={styles.title}>Start a New Game!</Text> */}
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.inputContainer}>
           <BodyText>Select a Number</BodyText>
           <Input
