@@ -8,7 +8,12 @@ const GameOverScreen = (props) => {
       <TitleText>The Game is over</TitleText>
       <View style={styles.imageContainer}>
         <Image
-          source={require("../../assets/success.png")}
+          fadeDuration={1000}
+          // source={require("../../assets/success.png")}
+          source={{
+            uri:
+              "https://www.geeky-gadgets.com/wp-content/uploads/2010/10/Everest-Summit.jpg",
+          }}
           style={styles.image}
           resizeMode="cover"
         />
