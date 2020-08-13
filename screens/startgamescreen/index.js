@@ -45,9 +45,9 @@ const StartGameScreen = () => {
   let confirmedOutput;
   if (confirmed)
     confirmedOutput = (
-      <Text style={styles.confirmedOutputText}>
-        Chosen Number: {selectedNumber}
-      </Text>
+      <Card style={styles.summaryContainer}>
+        <Text>Chosen Number: {selectedNumber}</Text>
+      </Card>
     );
 
   return (
@@ -121,11 +121,13 @@ const styles = StyleSheet.create({
     width: 50,
     textAlign: "center",
   },
+  summaryContainer: {
+    marginTop: 20,
+  },
   confirmedOutputText: {
     color: "#fff",
     marginVertical: 10,
     backgroundColor: Colors.primaryColor,
-    // flex: 1,
     flexDirection: "row",
     width: "80%",
     borderRadius: 5,
