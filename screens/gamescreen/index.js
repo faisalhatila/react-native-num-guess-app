@@ -6,6 +6,7 @@ import {
   Alert,
   ScrollView,
   FlatList,
+  Dimensions,
 } from "react-native";
 import { NumberContainer, Card, MainButton, BodyText } from "../../components";
 import { Ionicons } from "@expo/vector-icons";
@@ -75,6 +76,10 @@ const GameScreen = (props) => {
       ...curPastGuesses,
     ]);
   };
+  let listContainerStyle = styles.listContainer;
+  if (Dimensions.get("window") < 350) {
+    listContainerStyle = styles.listContainerBig;
+  }
   return (
     <View style={styles.screen}>
       <Text style={DefaultStyles.title}>Opponent's Guess</Text>
@@ -87,7 +92,7 @@ const GameScreen = (props) => {
           <Ionicons name="md-add" size={24} color="#fff" />
         </MainButton>
       </Card>
-      <View style={styles.listContainer}>
+      <View style={listContainerStyle}>
         {/* <ScrollView contentContainerStyle={styles.list}>
           {pastGuesses.map((guess, i) => {
             console.log(guess, i);
@@ -114,13 +119,18 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 20,
+    // marginTop: 20,
+    marginTop: Dimensions.get("window").height > 600 ? 30 : 5,
     width: 300,
     maxWidth: "90%",
   },
   listContainer: {
     width: "60%",
     flex: 1,
+  },
+  listContainerBig: {
+    flex: 1,
+    width: "80%",
   },
   list: {
     flexGrow: 1,
