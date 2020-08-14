@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Text, Alert, ScrollView } from "react-native";
-import { NumberContainer, Card, MainButton } from "../../components";
+import { NumberContainer, Card, MainButton, BodyText } from "../../components";
 import { Ionicons } from "@expo/vector-icons";
 import DefaultStyles from "../../constants/default-styles";
 const generateRandomBetween = (min, max, exclude) => {
@@ -14,11 +14,20 @@ const generateRandomBetween = (min, max, exclude) => {
   }
 };
 
+const renderListItem = (value, noOfRound) => {
+  return (
+    <View key={value} style={styles.listItem}>
+      <BodyText> # {noOfRound}</BodyText>
+      <BodyText>{value}</BodyText>
+    </View>
+  );
+};
+
 const GameScreen = (props) => {
   const initialGuess = generateRandomBetween(1, 100, props.userChoice);
-  const [currentGuess, setCurrentGuess] = useState([initialGuess]);
+  const [currentGuess, setCurrentGuess] = useState(initialGuess);
   // const [rounds, setRounds] = useState(0);
-  const [pastGuesses, setPastGuesses] = useState([]);
+  const [pastGuesses, setPastGuesses] = useState([initialGuess]);
   const currentLow = useRef(1);
   const currentHight = useRef(100);
 
@@ -70,13 +79,14 @@ const GameScreen = (props) => {
           <Ionicons name="md-add" size={24} color="#fff" />
         </MainButton>
       </Card>
-      <ScrollView>
-        {pastGuesses.map((guess) => (
-          <View key={guess}>
-            <Text>{guess}</Text>
-          </View>
-        ))}
-      </ScrollView>
+      <View style={styles.listContainer}>
+        <ScrollView contentContainerStyle={styles.list}>
+          {pastGuesses.map((guess, i) => {
+            console.log(guess, i);
+            return renderListItem(guess, pastGuesses.length - i);
+          })}
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -93,6 +103,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 300,
     maxWidth: "90%",
+  },
+  listContainer: {
+    width: "80%",
+    flex: 1,
+  },
+  list: {
+    flexGrow: 1,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  listItem: {
+    borderColor: "#000",
+    borderWidth: 1,
+    padding: 15,
+    marginVertical: 10,
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "60%",
   },
 });
 
