@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,11 +12,39 @@ import { BodyText, TitleText, MainButton } from "../../components";
 import Colors from "../../constants/colors";
 
 const GameOverScreen = (props) => {
+  const [availableDeviceWidth, setAvailableDeviceWidth] = useState(
+    Dimensions.get("window").width
+  );
+  const [availableDeviceHeight, setAvailableDeviceHeight] = useState(
+    Dimensions.get("window").height
+  );
+  useEffect(() => {
+    const updateLayout = () => {
+      setAvailableDeviceWidth(Dimensions.get("window").width);
+      setAvailableDeviceHeight(Dimensions.get("window").height);
+    };
+
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  });
   return (
     <ScrollView>
       <View style={styles.screen}>
         <TitleText>The Game is over</TitleText>
-        <View style={styles.imageContainer}>
+        <View
+          style={{
+            ...styles.imageContainer,
+            ...{
+              width: availableDeviceWidth * 0.7,
+              height: availableDeviceWidth * 0.7,
+              borderRadius: (availableDeviceWidth * 0.7) / 2,
+              marginVertical: availableDeviceHeight / 30,
+            },
+          }}
+        >
           <Image
             fadeDuration={1000}
             // source={require("../../assets/success.png")}
@@ -28,7 +56,14 @@ const GameOverScreen = (props) => {
             resizeMode="cover"
           />
         </View>
-        <View style={styles.resultContainer}>
+        <View
+          style={{
+            ...styles.resultContainer,
+            ...{
+              fontSize: availableDeviceHeight < 400 ? 16 : 20,
+            },
+          }}
+        >
           <BodyText style={styles.resultText}>
             Your phone needed
             <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds to
@@ -36,7 +71,6 @@ const GameOverScreen = (props) => {
             <Text style={styles.highlight}>{props.userNumber}</Text>.
           </BodyText>
         </View>
-        {/* <Button title="NEW GAME" onPress={props.onRestart} /> */}
         <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
       </View>
     </ScrollView>
@@ -48,6 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 20,
   },
   imageContainer: {
     borderWidth: 3,
